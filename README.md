@@ -8,7 +8,7 @@ The primary significance of PV codes is their ability to correct a larger number
 
 ## **1- Installation**
 
-```bash
+
 git clone https://github.com/amirhoseinbghr91/pv-codes.git
 cd pv-codes
 pip install -e .
