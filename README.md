@@ -99,7 +99,9 @@ The current decoder uses a brute-force search over all polynomials of degree ≤
 If you encounter issues:
 
 Check that your field size q is a prime power.
-Ensure n ≤ q (you can't have more than q distinct evaluation points).
+     Ensure n ≤ q (you can't have more than q distinct evaluation points).
 Increase r and/or l if interpolation fails (the error will say "Not enough monomials").
-For more details, see the docstrings in src/pv_codes/init.py and each module.
+     For more details, see the docstrings in src/pv_codes/init.py and each module.
+
+
 Amirhosein Bagheri
