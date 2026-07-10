@@ -115,5 +115,3 @@ Increase r and/or l if interpolation fails (the error will say "Not enough monom
 
 by Amirhosein Bagheri
 
-
-Amirhosein Bagheri
