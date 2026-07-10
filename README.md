@@ -22,7 +22,8 @@ galois (≥ 0.3.0) – for finite field arithmetic
 These will be installed automatically when you install the package via pip.
 ## **3. Basic Usage**
 Encoding a massage
-python
+
+    python
 
     from pv\_codes import get\_field, encode
     import galois
