@@ -27,7 +27,7 @@ python
 from pv\_codes import get\_field, encode
 import galois
 
-# Choose parameters
+### Choose parameters
 q = 7                     # field size (prime power)
 GF = get\_field(q)
 n = 5                     # number of evaluation points (codeword length)
@@ -35,16 +35,16 @@ k = 2                     # degree of message polynomial < k
 h = 2                     # exponent used in PV construction
 m = 2                     # number of levels (polynomials to evaluate)
 
-# Define the irreducible polynomial E of degree k
+### Define the irreducible polynomial E of degree k
 E = GF.irreducible\_poly(k)
 
-# Evaluation points (must be distinct elements of GF(q))
+### Evaluation points (must be distinct elements of GF(q))
 points = GF([1, 2, 3, 4, 5])
 
-# Message polynomial (coefficients: constant term first)
+### Message polynomial (coefficients: constant term first)
 f = galois.Poly([1, 2], field=GF)   # f(x) = 2x + 1
 
-# Encode
+### Encode
 codeword = encode(f, points, h, E, m)
 print("Codeword:", codeword)
 
@@ -53,10 +53,10 @@ python
 
 from pv\_codes import list\_decode
 
-# Received word (could be corrupted)
+### Received word (could be corrupted)
 received = codeword  # no errors, or modify some symbols
 
-# Decode: r and l are degree bounds for interpolation (choose enough)
+### Decode: r and l are degree bounds for interpolation (choose enough)
 r = 1      # max degree in x
 l = 1      # max degree in each y\_i
 max\_deg = k - 1
@@ -69,10 +69,10 @@ print("Candidates:", candidates)
 ## **4. Testing the Library**
 bash
 
-# Inside the project directory (after cloning or installing)
+### Inside the project directory (after cloning or installing)
 python -m pytest tests/
 
-# Or run a specific test file
+### Or run a specific test file
 python tests/test\_pv.py
 
 ## **5. Important Notes**
@@ -84,11 +84,11 @@ python tests/test\_pv.py
 ## **6. Example: Decoding with One Error**
 python
 
-# Corrupt the last symbol
+### Corrupt the last symbol
 corrupted = list(codeword)
 corrupted[-1] = (GF(0), GF(0))
 
-# Decode with tau=0.8 (at least 4 agreements out of 5)
+### Decode with tau=0.8 (at least 4 agreements out of 5)
 candidates = list\_decode(corrupted, points, h, E, m, r, l, max\_deg, tau=0.8)
 print("Candidates with one error:", candidates)
 
