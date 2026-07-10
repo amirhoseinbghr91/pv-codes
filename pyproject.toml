@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "pv-codes"
 version = "0.1.0"
 description = "Parvaresh–Vardy error-correcting codes with list-decoding"
-authors = [{name = "Your Name", email = "you@example.com"}]
+authors = [{name = "Amirhosein Bagheri", email = "me90s@proton.me"}]
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
