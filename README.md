@@ -8,7 +8,7 @@ The primary significance of PV codes is their ability to correct a larger number
 
 ## **1. Installation**
 
-
+    bash
     git clone https://github.com/amirhoseinbghr91/pv-codes.git
     cd pv-codes
     pip install -e .
@@ -16,66 +16,77 @@ The primary significance of PV codes is their ability to correct a larger number
 ## **2. Dependencies**
 
 Python ≥ 3.9
-numpy (≥ 1.24)
+    numpy (≥ 1.24)
 galois (≥ 0.3.0) – for finite field arithmetic
 
 These will be installed automatically when you install the package via pip.
+
+
+These will be installed automatically when you install the package via pip.
 ## **3. Basic Usage**
-Encoding a massage
+###Encoding a massage
 
     python
-
-    from pv\_codes import get\_field, encode
+    from pv_codes import get_field, encode
     import galois
 
-    ### Choose parameters
+    # Choose parameters
     q = 7                     # field size (prime power)
-    GF = get\_field(q)
+    GF = get_field(q)
     n = 5                     # number of evaluation points (codeword length)
     k = 2                     # degree of message polynomial < k
     h = 2                     # exponent used in PV construction
     m = 2                     # number of levels (polynomials to evaluate)
 
-    ### Define the irreducible polynomial E of degree k
-    E = GF.irreducible\_poly(k)
+    # Define the irreducible polynomial E of degree k
+    E = GF.irreducible_poly(k)
 
-    ### Evaluation points (must be distinct elements of GF(q))
+    # Evaluation points (must be distinct elements of GF(q))
     points = GF([1, 2, 3, 4, 5])
 
-    ### Message polynomial (coefficients: constant term first)
+    # Message polynomial (coefficients: constant term first)
     f = galois.Poly([1, 2], field=GF)   # f(x) = 2x + 1
 
-    ### Encode
+    # Encode
     codeword = encode(f, points, h, E, m)
     print("Codeword:", codeword)
 
-    List-decoding (brute-force for small fields)
-    
+
+
+
+###List-decoding (brute-force for small fields)
+
     python
+    from pv_codes import list_decode
 
-    from pv\_codes import list\_decode
-
-    ### Received word (could be corrupted)
+    # Received word (could be corrupted)
     received = codeword  # no errors, or modify some symbols
 
-    ### Decode: r and l are degree bounds for interpolation (choose enough)
+    # Decode: r and l are degree bounds for interpolation (choose enough)
     r = 1      # max degree in x
-    l = 1      # max degree in each y\_i
-    max\_deg = k - 1
+    l = 1      # max degree in each y_i
+    max_deg = k - 1
 
-    candidates = list\_decode(
-    received, points, h, E, m, r, l, max\_deg, field=GF, tau=1.0
+    candidates = list_decode(
+    received, points, h, E, m, r, l, max_deg, field=GF, tau=1.0
     )
     print("Candidates:", candidates)
 
+
+
+
+
+
+
 ## **4. Testing the Library**
     bash
-
-    ### Inside the project directory (after cloning or installing)
+    # Inside the project directory (after cloning or installing)
     python -m pytest tests/
 
-    ### Or run a specific test file
-    python tests/test\_pv.py
+    # Or run a specific test file
+    python tests/test_pv.py
+
+
 
 ## **5. Important Notes**
 
@@ -84,24 +95,25 @@ The current decoder uses a brute-force search over all polynomials of degree ≤
     The tau parameter in list_decode sets the required fraction of agreements. Use tau=1.0 for no errors, lower for list-decoding with errors.
 
 ## **6. Example: Decoding with One Error**
-    python
-
-    ### Corrupt the last symbol
+    # Corrupt the last symbol
     corrupted = list(codeword)
     corrupted[-1] = (GF(0), GF(0))
 
-    ### Decode with tau=0.8 (at least 4 agreements out of 5)
-    candidates = list\_decode(corrupted, points, h, E, m, r, l, max\_deg, tau=0.8)
+    # Decode with tau=0.8 (at least 4 agreements out of 5)
+    candidates = list_decode(corrupted, points, h, E, m, r, l, max_deg, tau=0.8)
     print("Candidates with one error:", candidates)
+
 
 ## **7. Getting Help**
 
 If you encounter issues:
 
 Check that your field size q is a prime power.
-     Ensure n ≤ q (you can't have more than q distinct evaluation points).
+    Ensure n ≤ q (you can't have more than q distinct evaluation points).
 Increase r and/or l if interpolation fails (the error will say "Not enough monomials").
-     For more details, see the docstrings in src/pv_codes/init.py and each module.
+    For more details, see the docstrings in src/pv_codes/__init__.py and each module.
+
+by Amirhosein Bagheri
 
 
 Amirhosein Bagheri
