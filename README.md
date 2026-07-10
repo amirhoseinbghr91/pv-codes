@@ -1,4 +1,4 @@
-# pv-codes
+# PV-Codes
 
 Forward Error Correction is a digital signal processing technique used to improve data reliability. It works by adding redundant data (parity bits) to a message before it is transmitted. This redundancy allows the receiver to detect and correct errors independently, without needing to request a retransmission from the sender.
 
@@ -13,14 +13,14 @@ git clone https://github.com/amirhoseinbghr91/pv-codes.git
 cd pv-codes
 pip install -e .
 
-2- Dependencies
+## **2- Dependencies**
 
     Python ≥ 3.9
     numpy (≥ 1.24)
     galois (≥ 0.3.0) – for finite field arithmetic
 
 These will be installed automatically when you install the package via pip.
-3- Basic Usage
+## **3- Basic Usage**
 Encoding a message
 python
 
@@ -66,7 +66,7 @@ candidates = list\_decode(
 )
 print("Candidates:", candidates)
 
-4- Testing the Library
+## **4- Testing the Library**
 bash
 
 # Inside the project directory (after cloning or installing)
@@ -75,13 +75,13 @@ python -m pytest tests/
 # Or run a specific test file
 python tests/test\_pv.py
 
-5- Important Notes
+## **5- Important Notes**
 
     The current decoder uses a brute-force search over all polynomials of degree ≤ max_deg. This is fine for small fields (e.g., GF(7), GF(16)) and small degrees. For larger parameters, you'll need to replace it with a more efficient algorithm (e.g., Hensel lifting or Guruswami–Sudan).
     The parameters r and l must be chosen so that the interpolation problem has a non-zero solution. A rule of thumb: the number of monomials (r+1)*(l+1)^m must be greater than the number of evaluation points n.
     The tau parameter in list_decode sets the required fraction of agreements. Use tau=1.0 for no errors, lower for list-decoding with errors.
 
-6- Example: Decoding with One Error
+## **6- Example: Decoding with One Error**
 python
 
 # Corrupt the last symbol
@@ -92,7 +92,7 @@ corrupted[-1] = (GF(0), GF(0))
 candidates = list\_decode(corrupted, points, h, E, m, r, l, max\_deg, tau=0.8)
 print("Candidates with one error:", candidates)
 
-7- Getting Help
+## **7- Getting Help**
 
 If you encounter issues:
 
