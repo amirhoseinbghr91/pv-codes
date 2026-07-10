@@ -1,0 +1,5 @@
+numpy>=1.24
+galois>=0.3.0
+
+[dev]
+pytest>=7.0
